@@ -82,7 +82,7 @@ CFLAGS_CORTEX_M += -mfpu=fpv5-d16 -mfloat-abi=hard
 SUPPORTS_HARDWARE_FP_SINGLE = 1
 SUPPORTS_HARDWARE_FP_DOUBLE = 1
 else
-ifeq ($(MCU_SERIES),$(filter $(MCU_SERIES),f0 l0))
+ifeq ($(MCU_SERIES),$(filter $(MCU_SERIES),f0 l0 g0))
 CFLAGS_CORTEX_M += -msoft-float
 else
 CFLAGS_CORTEX_M += -mfpu=fpv4-sp-d16 -mfloat-abi=hard
@@ -95,6 +95,7 @@ CFLAGS_MCU_f0 = $(CFLAGS_CORTEX_M) -mtune=cortex-m0 -mcpu=cortex-m0
 CFLAGS_MCU_f4 = $(CFLAGS_CORTEX_M) -mtune=cortex-m4 -mcpu=cortex-m4
 CFLAGS_MCU_f7 = $(CFLAGS_CORTEX_M) -mtune=cortex-m7 -mcpu=cortex-m7
 CFLAGS_MCU_l0 = $(CFLAGS_CORTEX_M) -mtune=cortex-m0plus -mcpu=cortex-m0plus
+CFLAGS_MCU_g0 = $(CFLAGS_CORTEX_M) -mtune=cortex-m0plus -mcpu=cortex-m0plus
 CFLAGS_MCU_l4 = $(CFLAGS_CORTEX_M) -mtune=cortex-m4 -mcpu=cortex-m4
 CFLAGS_MCU_h7 = $(CFLAGS_CORTEX_M) -mtune=cortex-m7 -mcpu=cortex-m7
 CFLAGS_MCU_wb = $(CFLAGS_CORTEX_M) -mtune=cortex-m4 -mcpu=cortex-m4
@@ -369,10 +370,16 @@ SRC_O += \
 	resethandler_m0.o \
 	shared/runtime/gchelper_m0.o
 else
+ifeq ($(MCU_SERIES),g0)
+SRC_O += \
+	resethandler_m0.o \
+	shared/runtime/gchelper_m0.o
+else
 SRC_O += \
 	system_stm32.o \
 	resethandler.o \
 	shared/runtime/gchelper_m3.o
+endif
 endif
 endif
 
@@ -401,7 +408,7 @@ HAL_SRC_C += $(addprefix $(HAL_DIR)/Src/stm32$(MCU_SERIES)xx_,\
 	ll_utils.c \
 	)
 
-ifeq ($(MCU_SERIES),$(filter $(MCU_SERIES),f4 f7 h7 l0 l4 wb))
+ifeq ($(MCU_SERIES),$(filter $(MCU_SERIES),f4 f7 h7 l0 l4 wb g0))
 HAL_SRC_C += $(addprefix $(HAL_DIR)/Src/stm32$(MCU_SERIES)xx_,\
 	ll_usb.c \
 	)
@@ -419,7 +426,6 @@ ifeq ($(MCU_SERIES),$(filter $(MCU_SERIES),f4 f7 h7))
 HAL_SRC_C += $(addprefix $(HAL_DIR)/Src/stm32$(MCU_SERIES)xx_,\
 	hal_mmc.c \
 	hal_sdram.c \
-	hal_dma_ex.c \
 	hal_dcmi.c \
 	)
 ifeq ($(MCU_SERIES),$(filter $(MCU_SERIES),f4))
@@ -429,7 +435,16 @@ $(BUILD)/$(HAL_DIR)/Src/stm32$(MCU_SERIES)xx_hal_mmc.o: CFLAGS += -Wno-error=par
 endif
 endif
 
+ifeq ($(MCU_SERIES),$(filter $(MCU_SERIES),f4 f7 h7 g0))
+HAL_SRC_C += $(addprefix $(HAL_DIR)/Src/stm32$(MCU_SERIES)xx_,\
+	hal_dma_ex.c \
+	)
+endif
+
 ifeq ($(CMSIS_MCU),$(filter $(CMSIS_MCU),STM32H743xx STM32H750xx STM32H7A3xx STM32H7A3xxQ STM32H7B3xx STM32H7B3xxQ))
+    HAL_SRC_C += $(addprefix $(HAL_DIR)/Src/stm32$(MCU_SERIES)xx_, hal_fdcan.c)
+else
+ifeq ($(MCU_SERIES),$(filter $(MCU_SERIES),g0))
     HAL_SRC_C += $(addprefix $(HAL_DIR)/Src/stm32$(MCU_SERIES)xx_, hal_fdcan.c)
 else
 ifeq ($(MCU_SERIES),$(filter $(MCU_SERIES),f0 f4 f7 h7))
@@ -441,8 +456,9 @@ $(BUILD)/$(HAL_DIR)/Src/Legacy/stm32$(MCU_SERIES)xx_hal_can.o: CFLAGS += -Wno-er
 endif
 endif
 endif
+endif
 
-ifeq ($(MCU_SERIES),$(filter $(MCU_SERIES),f0 f4 f7 l0))
+ifeq ($(MCU_SERIES),$(filter $(MCU_SERIES),f0 f4 f7 l0 g0))
 HAL_SRC_C += $(addprefix $(HAL_DIR)/Src/stm32$(MCU_SERIES)xx_,\
 	hal_i2s.c \
 	)

@@ -394,6 +394,16 @@
 #define MICROPY_HW_RFCORE_BLE_LL_ONLY                   (1) // use LL only, we provide the rest of the BLE stack
 #endif
 
+// Configuration for STM32G0 series
+#elif defined(STM32G0)
+
+#define MP_HAL_UNIQUE_ID_ADDRESS (0x1fff7590)
+#define PYB_EXTI_NUM_VECTORS (22) // previously 23
+#define MICROPY_HW_MAX_I2C (3)
+#define MICROPY_HW_MAX_TIMER (17)
+#define MICROPY_HW_MAX_UART (6)
+#define MICROPY_HW_MAX_LPUART (2)
+
 #else
 #error Unsupported MCU series
 #endif
@@ -480,7 +490,7 @@
 // Enable CAN if there are any peripherals defined
 #if defined(MICROPY_HW_CAN1_TX) || defined(MICROPY_HW_CAN2_TX) || defined(MICROPY_HW_CAN3_TX)
 #define MICROPY_HW_ENABLE_CAN (1)
-#if defined(STM32H7)
+#if defined(STM32H7) || defined(STM32G0)
 #define MICROPY_HW_ENABLE_FDCAN (1) // define for MCUs with FDCAN
 #endif
 #else

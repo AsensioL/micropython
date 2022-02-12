@@ -63,6 +63,8 @@
 ///     # output the sine-wave at 400Hz
 ///     dac = DAC(1)
 ///     dac.write_timed(buf, 400 * len(buf), mode=DAC.CIRCULAR)
+//------------------------------------------
+//#define MICROPY_HW_ENABLE_DAC 1 // Delete me
 
 #if defined(MICROPY_HW_ENABLE_DAC) && MICROPY_HW_ENABLE_DAC
 
@@ -252,7 +254,7 @@ STATIC mp_obj_t pyb_dac_init_helper(pyb_dac_obj_t *self, size_t n_args, const mp
     __DAC_CLK_ENABLE();
     #elif defined(STM32H7)
     __HAL_RCC_DAC12_CLK_ENABLE();
-    #elif defined(STM32F0) || defined(STM32L4)
+    #elif defined(STM32F0) || defined(STM32L4) || defined(STM32G0)
     __HAL_RCC_DAC1_CLK_ENABLE();
     #else
     #error Unsupported Processor

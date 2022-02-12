@@ -529,7 +529,7 @@ void TAMP_STAMP_IRQHandler(void) {
 
 void RTC_WKUP_IRQHandler(void) {
     IRQ_ENTER(RTC_WKUP_IRQn);
-    #if defined(STM32H7A3xx) || defined(STM32H7A3xxQ) || defined(STM32H7B3xx) || defined(STM32H7B3xxQ)
+    #if defined(STM32H7A3xx) || defined(STM32H7A3xxQ) || defined(STM32H7B3xx) || defined(STM32H7B3xxQ) || defined(STM32G0)
     RTC->SR &= ~RTC_SR_WUTF; // clear wakeup interrupt flag
     #else
     RTC->ISR &= ~RTC_ISR_WUTF; // clear wakeup interrupt flag
@@ -778,6 +778,29 @@ void USART4_5_IRQHandler(void) {
     IRQ_EXIT(USART4_5_IRQn);
 }
 
+#elif defined(STM32G0)
+
+#if defined(STM32G0B1xx) || defined(STM32G0C1xx)
+void USART2_LPUART2_IRQHandler(void) {
+    IRQ_ENTER(USART2_LPUART2_IRQn);
+    uart_irq_handler(2);
+    uart_irq_handler(PYB_LPUART_2);
+    IRQ_EXIT(USART2_LPUART2_IRQn);
+}
+
+void USART3_4_5_6_LPUART1_IRQHandler(void) {
+    IRQ_ENTER(USART3_4_5_6_LPUART1_IRQn);
+    uart_irq_handler(3);
+    uart_irq_handler(4);
+    uart_irq_handler(5);
+    uart_irq_handler(6);
+    uart_irq_handler(PYB_LPUART_1);
+    IRQ_EXIT(USART3_4_5_6_LPUART1_IRQn);
+}
+#else
+	#error Unsupported processor
+#endif
+
 #else
 
 #if defined(USART3)
@@ -788,11 +811,27 @@ void USART3_IRQHandler(void) {
 }
 #endif
 
+#if defined(USART4)
+void USART4_IRQHandler(void) {
+    IRQ_ENTER(USART4_IRQn);
+    uart_irq_handler(4);
+    IRQ_EXIT(USART4_IRQn);
+}
+#endif
+
 #if defined(UART4)
 void UART4_IRQHandler(void) {
     IRQ_ENTER(UART4_IRQn);
     uart_irq_handler(4);
     IRQ_EXIT(UART4_IRQn);
+}
+#endif
+
+#if defined(USART5)
+void USART5_IRQHandler(void) {
+    IRQ_ENTER(USART5_IRQn);
+    uart_irq_handler(5);
+    IRQ_EXIT(USART5_IRQn);
 }
 #endif
 
@@ -851,6 +890,14 @@ void LPUART1_IRQHandler(void) {
     IRQ_ENTER(LPUART1_IRQn);
     uart_irq_handler(PYB_LPUART_1);
     IRQ_EXIT(LPUART1_IRQn);
+}
+#endif
+
+#if defined(LPUART2)
+void LPUART2_IRQHandler(void) {
+    IRQ_ENTER(LPUART2_IRQn);
+    uart_irq_handler(PYB_LPUART_2);
+    IRQ_EXIT(LPUART2_IRQn);
 }
 #endif
 
