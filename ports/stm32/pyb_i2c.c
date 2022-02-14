@@ -130,7 +130,7 @@ const pyb_i2c_obj_t pyb_i2c_obj[] = {
     #endif
 };
 
-#if defined(STM32F7) || defined(STM32L4) || defined(STM32H7) || defined(STM32G0)
+#if defined(STM32F7) || defined(STM32G0) || defined(STM32G4) || defined(STM32L4) || defined(STM32H7)
 
 // The STM32F0, F3, F7, H7 and L4 use a TIMINGR register rather than ClockSpeed and
 // DutyCycle.
@@ -163,6 +163,38 @@ const pyb_i2c_obj_t pyb_i2c_obj[] = {
 #define MICROPY_HW_I2C_BAUDRATE_DEFAULT (PYB_I2C_SPEED_FULL)
 #define MICROPY_HW_I2C_BAUDRATE_MAX (PYB_I2C_SPEED_FAST)
 
+#elif defined(STM32G0)
+// generated using CubeMX
+#define MICROPY_HW_I2C_BAUDRATE_TIMING { \
+        {PYB_I2C_SPEED_STANDARD, 0x10707DBC}, \
+        {PYB_I2C_SPEED_FULL, 0x00602173}, \
+        {PYB_I2C_SPEED_FAST, 0x00300B29}, \
+}
+#define MICROPY_HW_I2C_BAUDRATE_DEFAULT (PYB_I2C_SPEED_FULL)
+#define MICROPY_HW_I2C_BAUDRATE_MAX (PYB_I2C_SPEED_FAST)
+
+#elif defined(STM32G4)
+// timing input depends on PLL
+// for now: 170MHz sysclock, PCLK 10.625 MHz
+// using PCLOCK
+// generated using CubeMX
+#if defined(STM32G431xx) || defined(STM32G441xx)
+#define MICROPY_HW_I2C_BAUDRATE_TIMING { \
+        {PYB_I2C_SPEED_STANDARD, 0x30A0A7FB}, \
+        {PYB_I2C_SPEED_STANDARD, 0x30A0A7FB}, \
+        {PYB_I2C_SPEED_STANDARD, 0x30A0A7FB}, \
+}
+#else
+#define MICROPY_HW_I2C_BAUDRATE_TIMING { \
+        {PYB_I2C_SPEED_STANDARD, 0x30A0A7FB}, \
+        {PYB_I2C_SPEED_STANDARD, 0x30A0A7FB}, \
+        {PYB_I2C_SPEED_STANDARD, 0x30A0A7FB}, \
+        {PYB_I2C_SPEED_STANDARD, 0x30A0A7FB}, \
+}
+#endif
+#define MICROPY_HW_I2C_BAUDRATE_DEFAULT (PYB_I2C_SPEED_STANDARD)
+#define MICROPY_HW_I2C_BAUDRATE_MAX (PYB_I2C_SPEED_STANDARD)
+
 #elif defined(STM32H7)
 
 // I2C TIMINGs obtained from the STHAL examples.
@@ -181,16 +213,6 @@ const pyb_i2c_obj_t pyb_i2c_obj[] = {
 #define MICROPY_HW_I2C_BAUDRATE_TIMING {{PYB_I2C_SPEED_STANDARD, 0x90112626}}
 #define MICROPY_HW_I2C_BAUDRATE_DEFAULT (PYB_I2C_SPEED_STANDARD)
 #define MICROPY_HW_I2C_BAUDRATE_MAX (PYB_I2C_SPEED_STANDARD)
-
-#elif defined(STM32G0)
-
-#define MICROPY_HW_I2C_BAUDRATE_TIMING { \
-        {PYB_I2C_SPEED_STANDARD, 0x10707DBC}, \
-        {PYB_I2C_SPEED_FULL, 0x00602173}, \
-        {PYB_I2C_SPEED_FAST, 0x00300B29}, \
-}
-#define MICROPY_HW_I2C_BAUDRATE_DEFAULT (PYB_I2C_SPEED_FULL)
-#define MICROPY_HW_I2C_BAUDRATE_MAX (PYB_I2C_SPEED_FAST)
 
 #else
 #error "no I2C timings for this MCU"
