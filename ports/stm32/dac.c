@@ -63,8 +63,6 @@
 ///     # output the sine-wave at 400Hz
 ///     dac = DAC(1)
 ///     dac.write_timed(buf, 400 * len(buf), mode=DAC.CIRCULAR)
-//------------------------------------------
-//#define MICROPY_HW_ENABLE_DAC 1 // Delete me
 
 #if defined(MICROPY_HW_ENABLE_DAC) && MICROPY_HW_ENABLE_DAC
 
