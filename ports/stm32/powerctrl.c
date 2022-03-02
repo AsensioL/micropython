@@ -286,7 +286,7 @@ int powerctrl_rcc_clock_config_pll(RCC_ClkInitTypeDef *rcc_init, uint32_t sysclk
 
 #endif
 
-#if !defined(STM32F0) && !defined(STM32L0) && !defined(STM32L4) && !defined(STM32G0)
+#if !defined(STM32F0) && !defined(STM32G0) && !defined(STM32L0) && !defined(STM32L4)
 
 STATIC uint32_t calc_ahb_div(uint32_t wanted_div) {
     #if defined(STM32H7)
