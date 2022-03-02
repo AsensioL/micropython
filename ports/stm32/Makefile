@@ -325,18 +325,7 @@ SRC_O += \
 	$(STARTUP_FILE) \
 	$(SYSTEM_FILE)
 
-ifeq ($(MCU_SERIES),f0)
-SRC_O += \
-	resethandler_m0.o \
-	shared/runtime/gchelper_m0.o
-else
-ifeq ($(MCU_SERIES),l0)
-CSUPEROPT = -Os # save some code space
-SRC_O += \
-	resethandler_m0.o \
-	shared/runtime/gchelper_m0.o
-else
-ifeq ($(MCU_SERIES),g0)
+ifeq ($(MCU_SERIES),$(filter $(MCU_SERIES),f0 g0 l0))
 SRC_O += \
 	resethandler_m0.o \
 	shared/runtime/gchelper_m0.o
@@ -345,8 +334,6 @@ SRC_O += \
 	system_stm32.o \
 	resethandler.o \
 	shared/runtime/gchelper_m3.o
-endif
-endif
 endif
 
 HAL_SRC_C += $(addprefix $(STM32LIB_HAL_BASE)/Src/stm32$(MCU_SERIES)xx_,\
