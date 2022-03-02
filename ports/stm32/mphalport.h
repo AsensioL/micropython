@@ -9,6 +9,8 @@
 #define MICROPY_PLATFORM_VERSION "HAL1.16.0"
 #elif defined(STM32F7)
 #define MICROPY_PLATFORM_VERSION "HAL1.7.0"
+#elif defined(STM32G0)
+#define MICROPY_PLATFORM_VERSION "HAL1.2.0"
 #elif defined(STM32G4)
 #define MICROPY_PLATFORM_VERSION "HAL1.3.0"
 #elif defined(STM32H7)
@@ -21,8 +23,6 @@
 #define MICROPY_PLATFORM_VERSION "HAL1.10.0"
 #elif defined(STM32WL)
 #define MICROPY_PLATFORM_VERSION "HAL1.1.0"
-#elif defined(STM32G0)
-#define MICROPY_PLATFORM_VERSION "HAL1.2.0"
 #endif
 
 extern const unsigned char mp_hal_status_to_errno_table[4];
