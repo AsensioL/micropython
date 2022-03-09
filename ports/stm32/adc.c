@@ -314,9 +314,9 @@ STATIC void adcx_init_periph(ADC_HandleTypeDef *adch, uint32_t resolution) {
 
     #if defined(STM32H7)
     HAL_ADCEx_Calibration_Start(adch, ADC_CALIB_OFFSET, ADC_SINGLE_ENDED);
-	#endif
+    #endif
     #if defined(STM32G0)
-	HAL_ADCEx_Calibration_Start(adch);
+    HAL_ADCEx_Calibration_Start(adch);
     #elif defined(STM32G4) || defined(STM32L4) || defined(STM32WB)
     HAL_ADCEx_Calibration_Start(adch, ADC_SINGLE_ENDED);
     #endif

@@ -119,8 +119,8 @@ void SystemClock_Config(void) {
     while ((RCC->CR & RCC_CR_HSIRDY) == 0) {
         // Wait for HSI to be ready
     }
-	
-	// Use the PLL to get a 64MHz SYSCLK
+    
+    // Use the PLL to get a 64MHz SYSCLK
     #define PLLM (HSI_VALUE / 16000000) // input is 8MHz
     #define PLLN (8) // 8*16MHz = 128MHz
     #define PLLP (2) // f_P = 64MHz
@@ -152,7 +152,7 @@ void SystemClock_Config(void) {
 
     SystemCoreClockUpdate();
     powerctrl_config_systick();
-	
+    
     #if MICROPY_HW_ENABLE_RNG || MICROPY_HW_ENABLE_USB
     // Enable the 48MHz internal oscillator
     RCC->CRRCR |= RCC_CRRCR_HSI48ON;
@@ -173,7 +173,7 @@ void SystemClock_Config(void) {
         | __HAL_RCC_CRS_RELOADVALUE_CALCULATE(48000000, 1000) << CRS_CFGR_RELOAD_Pos;
     #endif
     #endif
-	}
+    }
 
 #elif defined(STM32L0)
 

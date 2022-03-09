@@ -279,11 +279,11 @@ STATIC void adc_config_channel(ADC_TypeDef *adc, uint32_t channel, uint32_t samp
         ADC1_COMMON->CCR |= ADC_CCR_VBATEN;
     #endif
     }
-	#if defined(STM32G0)
+    #if defined(STM32G0)
     adc->SMPR = sample_time << ADC_SMPR_SMP1_Pos; // select sample time from SMP1 (default)
-	#else
+    #else
     adc->SMPR = sample_time << ADC_SMPR_SMP_Pos; // select sample time
-	#endif
+    #endif
     adc->CHSELR = 1 << channel; // select channel for conversion
 
     #elif defined(STM32F4) || defined(STM32F7)

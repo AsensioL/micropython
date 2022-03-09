@@ -154,20 +154,20 @@ STATIC const uint8_t nvic_irq_channel[EXTI_NUM_VECTORS] = {
     #else
     PVD_VDDIO2_IRQn,
     #endif
-	#if defined(STM32G0)
+    #if defined(STM32G0)
     ADC1_COMP_IRQn,
     ADC1_COMP_IRQn,
-	RTC_TAMP_IRQn,
+    RTC_TAMP_IRQn,
     0, // COMP3
     RTC_TAMP_IRQn,// 21
-	#else
+    #else
     RTC_IRQn,
     0, // internal USB wakeup event
     RTC_IRQn,
     RTC_IRQn,
     ADC1_COMP_IRQn,
     ADC1_COMP_IRQn,
-	#endif
+    #endif
 
     #else
 
@@ -325,15 +325,15 @@ void extint_register_pin(const pin_obj_t *pin, uint32_t mode, bool hard_irq, mp_
         #if !defined(STM32WB) && !defined(STM32WL)
         __HAL_RCC_SYSCFG_CLK_ENABLE();
         #endif
-		#if defined(STM32G0)
+        #if defined(STM32G0)
         EXTI->EXTICR[line >> 2] =
             (EXTI->EXTICR[line >> 2] & ~(0x0f << (4 * (line & 0x03))))
             | ((uint32_t)(GPIO_GET_INDEX(pin->gpio)) << (4 * (line & 0x03)));
-		#else
+        #else
         SYSCFG->EXTICR[line >> 2] =
             (SYSCFG->EXTICR[line >> 2] & ~(0x0f << (4 * (line & 0x03))))
             | ((uint32_t)(GPIO_GET_INDEX(pin->gpio)) << (4 * (line & 0x03)));
-		#endif
+        #endif
 
         extint_trigger_mode(line, mode);
 
@@ -368,16 +368,16 @@ void extint_set(const pin_obj_t *pin, uint32_t mode) {
         #if !defined(STM32WB) && !defined(STM32WL)
         __HAL_RCC_SYSCFG_CLK_ENABLE();
         #endif
-		#if defined(STM32G0)
+        #if defined(STM32G0)
         EXTI->EXTICR[line >> 2] =
             (EXTI->EXTICR[line >> 2] & ~(0x0f << (4 * (line & 0x03))))
             | ((uint32_t)(GPIO_GET_INDEX(pin->gpio)) << (4 * (line & 0x03)));
-		#else
+        #else
         SYSCFG->EXTICR[line >> 2] =
             (SYSCFG->EXTICR[line >> 2] & ~(0x0f << (4 * (line & 0x03))))
             | ((uint32_t)(GPIO_GET_INDEX(pin->gpio)) << (4 * (line & 0x03)));
-		#endif
-		
+        #endif
+        
         // Enable or disable the rising detector
         if ((mode & GPIO_MODE_IT_RISING) == GPIO_MODE_IT_RISING) {
             EXTI_RTSR |= 1 << line;
@@ -556,15 +556,15 @@ STATIC mp_obj_t extint_regs(void) {
     printf("EXTI_FTSR2  %08x\n", (unsigned int)EXTI->FTSR2);
     printf("EXTI_SWIER1 %08x\n", (unsigned int)EXTI->SWIER1);
     printf("EXTI_SWIER2 %08x\n", (unsigned int)EXTI->SWIER2);
-	#if defined(STM32G0)
+    #if defined(STM32G0)
     printf("EXTI_RPR1    %08x\n", (unsigned int)EXTI->RPR1);
     printf("EXTI_FPR1    %08x\n", (unsigned int)EXTI->FPR1);
     printf("EXTI_RPR2    %08x\n", (unsigned int)EXTI->RPR2);
     printf("EXTI_FPR2    %08x\n", (unsigned int)EXTI->FPR2);
-	#else
+    #else
     printf("EXTI_PR1    %08x\n", (unsigned int)EXTI->PR1);
     printf("EXTI_PR2    %08x\n", (unsigned int)EXTI->PR2);
-	#endif
+    #endif
     #elif defined(STM32H7)
     printf("EXTI_IMR1   %08x\n", (unsigned int)EXTI_D1->IMR1);
     printf("EXTI_IMR2   %08x\n", (unsigned int)EXTI_D1->IMR2);

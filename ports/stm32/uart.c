@@ -275,11 +275,11 @@ bool uart_init(pyb_uart_obj_t *uart_obj,
         case PYB_UART_2:
             uart_unit = 2;
             UARTx = USART2;
-			#if defined(STM32G0)
+            #if defined(STM32G0)
             irqn = USART2_LPUART2_IRQn;
-			#else
+            #else
             irqn = USART2_IRQn;
-			#endif
+            #endif
             pins[0] = MICROPY_HW_UART2_TX;
             pins[1] = MICROPY_HW_UART2_RX;
             #if defined(MICROPY_HW_UART2_RTS)
@@ -302,7 +302,7 @@ bool uart_init(pyb_uart_obj_t *uart_obj,
             UARTx = USART3;
             #if defined(STM32F0)
             irqn = USART3_8_IRQn;
-			#elif defined(STM32G0)
+            #elif defined(STM32G0)
             irqn = USART3_4_5_6_LPUART1_IRQn;
             #else
             irqn = USART3_IRQn;
@@ -334,7 +334,7 @@ bool uart_init(pyb_uart_obj_t *uart_obj,
             UARTx = USART4;
             irqn = USART4_5_IRQn;
             __HAL_RCC_USART4_CLK_ENABLE();
-			#elif defined(STM32G0)
+            #elif defined(STM32G0)
             UARTx = USART4;
             irqn = USART3_4_5_6_LPUART1_IRQn;
             __HAL_RCC_USART4_CLK_ENABLE();
@@ -369,7 +369,7 @@ bool uart_init(pyb_uart_obj_t *uart_obj,
             UARTx = USART5;
             irqn = USART4_5_IRQn;
             __HAL_RCC_USART5_CLK_ENABLE();
-			#elif defined(STM32G0)
+            #elif defined(STM32G0)
             UARTx = USART5;
             irqn = USART3_4_5_6_LPUART1_IRQn;
             __HAL_RCC_USART5_CLK_ENABLE();
@@ -399,7 +399,7 @@ bool uart_init(pyb_uart_obj_t *uart_obj,
             UARTx = USART6;
             #if defined(STM32F0)
             irqn = USART3_8_IRQn;
-			#elif defined(STM32G0)
+            #elif defined(STM32G0)
             irqn = USART3_4_5_6_LPUART1_IRQn;
             #else
             irqn = USART6_IRQn;
@@ -501,11 +501,11 @@ bool uart_init(pyb_uart_obj_t *uart_obj,
             uart_fn = AF_FN_LPUART;
             uart_unit = 1;
             UARTx = LPUART1;
-			#if defined(STM32G0)
+            #if defined(STM32G0)
             irqn = USART3_4_5_6_LPUART1_IRQn;
-			#else
+            #else
             irqn = LPUART1_IRQn;
-			#endif
+            #endif
             pins[0] = MICROPY_HW_LPUART1_TX;
             pins[1] = MICROPY_HW_LPUART1_RX;
             #if defined(MICROPY_HW_LPUART1_RTS)
@@ -527,11 +527,11 @@ bool uart_init(pyb_uart_obj_t *uart_obj,
             uart_fn = AF_FN_LPUART;
             uart_unit = 2;
             UARTx = LPUART2;
-			#if defined(STM32G0)
+            #if defined(STM32G0)
             irqn = USART2_LPUART2_IRQn;
-			#else
-			irqn = USART2_IRQn;
-			#endif
+            #else
+            irqn = USART2_IRQn;
+            #endif
             pins[0] = MICROPY_HW_LPUART2_TX;
             pins[1] = MICROPY_HW_LPUART2_RX;
             #if defined(MICROPY_HW_LPUART2_RTS)
@@ -677,18 +677,18 @@ void uart_deinit(pyb_uart_obj_t *self) {
         __HAL_RCC_USART1_CLK_DISABLE();
     #if defined(USART2)
     } else if (self->uart_id == 2) {
-		#if defined(STM32G0)
+        #if defined(STM32G0)
         HAL_NVIC_DisableIRQ(USART2_LPUART2_IRQn);
-		#else
+        #else
         HAL_NVIC_DisableIRQ(USART2_IRQn);
-		#endif
+        #endif
         __HAL_RCC_USART2_FORCE_RESET();
         __HAL_RCC_USART2_RELEASE_RESET();
         __HAL_RCC_USART2_CLK_DISABLE();
     #endif
     #if defined(USART3)
     } else if (self->uart_id == 3) {
-		#if defined(STM32G0)
+        #if defined(STM32G0)
         HAL_NVIC_DisableIRQ(USART3_4_5_6_LPUART1_IRQn);
         #elif !defined(STM32F0)
         HAL_NVIC_DisableIRQ(USART3_IRQn);
@@ -772,22 +772,22 @@ void uart_deinit(pyb_uart_obj_t *self) {
     #endif
     #if defined(LPUART1)
     } else if (self->uart_id == PYB_LPUART_1) {
-		#if defined(STM32G0)
+        #if defined(STM32G0)
         HAL_NVIC_DisableIRQ(USART3_4_5_6_LPUART1_IRQn);
-		#else
+        #else
         HAL_NVIC_DisableIRQ(LPUART1_IRQn);
-		#endif
+        #endif
         __HAL_RCC_LPUART1_FORCE_RESET();
         __HAL_RCC_LPUART1_RELEASE_RESET();
         __HAL_RCC_LPUART1_CLK_DISABLE();
     #endif
     #if defined(LPUART2)
     } else if (self->uart_id == PYB_LPUART_2) {
-		#if defined(STM32G0)
+        #if defined(STM32G0)
         HAL_NVIC_DisableIRQ(USART2_LPUART2_IRQn);
-		#else
+        #else
         HAL_NVIC_DisableIRQ(LPUART2_IRQn);
-		#endif
+        #endif
         __HAL_RCC_LPUART2_FORCE_RESET();
         __HAL_RCC_LPUART2_RELEASE_RESET();
         __HAL_RCC_LPUART2_CLK_DISABLE();

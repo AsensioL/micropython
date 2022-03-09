@@ -816,18 +816,18 @@ STATIC const uint32_t tim_instance_table[MICROPY_HW_MAX_TIMER] = {
     #endif
     TIM_ENTRY(2, TIM2_IRQn),
     #if defined(TIM3)
-	#if defined(STM32G0B1xx) || defined(STM32G0C1xx)
+    #if defined(STM32G0B1xx) || defined(STM32G0C1xx)
     TIM_ENTRY(3, TIM3_TIM4_IRQn),
-	#else
+    #else
     TIM_ENTRY(3, TIM3_IRQn),
     #endif
-	#endif
+    #endif
     #if defined(TIM4)
-	#if defined(STM32G0B1xx) || defined(STM32G0C1xx)
+    #if defined(STM32G0B1xx) || defined(STM32G0C1xx)
     TIM_ENTRY(3, TIM3_TIM4_IRQn),
-	#else
+    #else
     TIM_ENTRY(4, TIM4_IRQn),
-	#endif
+    #endif
     #endif
     #if defined(TIM5)
     TIM_ENTRY(5, TIM5_IRQn),
@@ -835,20 +835,20 @@ STATIC const uint32_t tim_instance_table[MICROPY_HW_MAX_TIMER] = {
     #if defined(TIM6)
     #if defined(STM32F412Zx)
     TIM_ENTRY(6, TIM6_IRQn),
-	#elif defined(STM32G0)
+    #elif defined(STM32G0)
     TIM_ENTRY(6, TIM6_DAC_LPTIM1_IRQn),
     #else
     TIM_ENTRY(6, TIM6_DAC_IRQn),
     #endif
     #endif
     #if defined(TIM7)
-	#if defined(STM32G0)
+    #if defined(STM32G0)
     TIM_ENTRY(7, TIM7_LPTIM2_IRQn),
-	#elif defined(STM32G4)
+    #elif defined(STM32G4)
     TIM_ENTRY(7, TIM7_DAC_IRQn),
     #else
     TIM_ENTRY(7, TIM7_IRQn),
-	#endif
+    #endif
     #endif
     #if defined(TIM8)
     #if defined(STM32F4) || defined(STM32F7) || defined(STM32H7)
@@ -885,7 +885,7 @@ STATIC const uint32_t tim_instance_table[MICROPY_HW_MAX_TIMER] = {
     #endif
     #endif
     #if defined(TIM16)
-	#if defined(STM32G0B1xx) || defined(STM32G0C1xx)
+    #if defined(STM32G0B1xx) || defined(STM32G0C1xx)
     TIM_ENTRY(16, TIM16_FDCAN_IT0_IRQn),
     #elif defined(STM32F0) || defined(STM32G0) || defined(STM32H7) || defined(STM32WL)
     TIM_ENTRY(16, TIM16_IRQn),
@@ -894,7 +894,7 @@ STATIC const uint32_t tim_instance_table[MICROPY_HW_MAX_TIMER] = {
     #endif
     #endif
     #if defined(TIM17)
-	#if defined(STM32G0B1xx) || defined(STM32G0C1xx)
+    #if defined(STM32G0B1xx) || defined(STM32G0C1xx)
     TIM_ENTRY(17, TIM17_FDCAN_IT1_IRQn),
     #elif defined(STM32F0) || defined(STM32G0) || defined(STM32H7) || defined(STM32WL)
     TIM_ENTRY(17, TIM17_IRQn),

@@ -387,8 +387,8 @@ int powerctrl_set_sysclk(uint32_t sysclk, uint32_t ahb, uint32_t apb1, uint32_t 
         && apb1 == HAL_RCC_GetPCLK1Freq()
         #if !defined(STM32G0)
         && apb2 == HAL_RCC_GetPCLK2Freq()
-		#endif
-		) {
+        #endif
+        ) {
         return 0;
     }
 
@@ -431,11 +431,11 @@ set_clk:
 
     // Desired system clock source is in sysclk_source
     RCC_ClkInitTypeDef RCC_ClkInitStruct;
-	#if defined(STM32G0) || defined(STM32G4)
-	RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_ALL;
+    #if defined(STM32G0) || defined(STM32G4)
+    RCC_ClkInitStruct.ClockType = RCC_CLOCKTYPE_ALL;
     #else
     RCC_ClkInitStruct.ClockType = (RCC_CLOCKTYPE_SYSCLK | RCC_CLOCKTYPE_HCLK | RCC_CLOCKTYPE_PCLK1 | RCC_CLOCKTYPE_PCLK2);
-	#endif
+    #endif
     if (sysclk_source == RCC_SYSCLKSOURCE_PLLCLK) {
         // Set HSE as system clock source to allow modification of the PLL configuration
         // We then change to PLL after re-configuring PLL
@@ -458,7 +458,7 @@ set_clk:
     RCC_ClkInitStruct.APB1CLKDivider = calc_apb1_div(ahb / apb1);
     #if !defined(STM32G0)
     RCC_ClkInitStruct.APB2CLKDivider = calc_apb2_div(ahb / apb2);
-	#endif
+    #endif
     #if defined(STM32H7)
     RCC_ClkInitStruct.SYSCLKDivider = RCC_SYSCLK_DIV1;
     RCC_ClkInitStruct.APB3CLKDivider = MICROPY_HW_CLK_APB3_DIV;

@@ -861,7 +861,7 @@ void USART3_4_5_6_LPUART1_IRQHandler(void) {
     IRQ_EXIT(USART3_4_5_6_LPUART1_IRQn);
 }
 #else
-	#error Unsupported processor
+    #error Unsupported processor
 #endif
 
 #elif defined(STM32L0)

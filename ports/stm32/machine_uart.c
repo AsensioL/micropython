@@ -80,7 +80,7 @@ STATIC void pyb_uart_print(const mp_print_t *print, mp_obj_t self_in, mp_print_k
         if (self->uart_id == PYB_LPUART_1) {
             mp_printf(print, "UART('LP1')");
         } else
-		#elif defined(LPUART2)
+        #elif defined(LPUART2)
         if (self->uart_id == PYB_LPUART_2) {
             mp_printf(print, "UART('LP2')");
         } else
