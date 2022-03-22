@@ -433,6 +433,7 @@ def run_tests(pyb, tests, args, result_dir, num_threads=1):
 
     if not has_coverage:
         skip_tests.add("cmdline/cmd_parsetree.py")
+        skip_tests.add("cmdline/repl_sys_ps1_ps2.py")
 
     # Some tests shouldn't be run on a PC
     if args.target == "unix":
@@ -504,6 +505,7 @@ def run_tests(pyb, tests, args, result_dir, num_threads=1):
         skip_tests.add("basics/del_local.py")  # requires checking for unbound local
         skip_tests.add("basics/exception_chain.py")  # raise from is not supported
         skip_tests.add("basics/scope_implicit.py")  # requires checking for unbound local
+        skip_tests.add("basics/sys_tracebacklimit.py")  # requires traceback info
         skip_tests.add("basics/try_finally_return2.py")  # requires raise_varargs
         skip_tests.add("basics/unboundlocal.py")  # requires checking for unbound local
         skip_tests.add("extmod/uasyncio_event.py")  # unknown issue
