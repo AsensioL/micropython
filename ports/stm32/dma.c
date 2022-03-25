@@ -85,7 +85,7 @@ struct _dma_descr_t {
     #else
     #error "Unsupported Processor"
     #endif
-    uint32_t sub_instance; // will become DMA_InitTypeDef.Request
+    uint32_t sub_instance;
     dma_id_t id;
     const DMA_InitTypeDef *init;
 };
