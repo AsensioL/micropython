@@ -2,13 +2,13 @@
 #define MICROPY_HW_MCU_NAME         "STM32G0B1xE"
 
 #define MICROPY_HW_HAS_SWITCH       (1)
-#define MICROPY_HW_HAS_FLASH        (0)
+#define MICROPY_HW_HAS_FLASH        (1)
 #define MICROPY_HW_ENABLE_RNG       (0)
 #define MICROPY_HW_ENABLE_RTC       (1)
 #define MICROPY_HW_ENABLE_DAC       (0)
 #define MICROPY_PY_PYB_LEGACY       (0)
 
-#define MICROPY_HW_ENABLE_INTERNAL_FLASH_STORAGE (0)
+#define MICROPY_HW_ENABLE_INTERNAL_FLASH_STORAGE (1)
 
 // HSE is 8MHz, HSI is 16MHz CPU freq set to 64MHz
 // Default source for the clock is HSI.
