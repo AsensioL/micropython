@@ -373,8 +373,8 @@ STATIC mp_obj_t pyb_uart_make_new(const mp_obj_type_t *type, size_t n_args, size
             uart_id = PYB_LPUART_1;
         #endif
         #ifdef LPUART2
-        } else if (strcmp(port, "LP2") == 0 && uart_exists(PYB_LPUART_1)) {
-            uart_id = PYB_LPUART_1;
+        } else if (strcmp(port, "LP2") == 0 && uart_exists(PYB_LPUART_2)) {
+            uart_id = PYB_LPUART_2;
         #endif
         } else {
             mp_raise_msg_varg(&mp_type_ValueError, MP_ERROR_TEXT("UART(%s) doesn't exist"), port);
