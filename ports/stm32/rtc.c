@@ -225,10 +225,10 @@ void rtc_init_finalise() {
 
     // fresh reset; configure RTC Calendar
     RTC_CalendarConfig();
-    #if defined(STM32G4) || defined(STM32L4) || defined(STM32WB) || defined(STM32WL)
-    if (__HAL_RCC_GET_FLAG(RCC_FLAG_BORRST) != RESET) {
-    #elif defined(STM32G0)
+    #if defined(STM32G0)
     if (__HAL_RCC_GET_FLAG(RCC_FLAG_PWRRST) != RESET) {
+    #elif defined(STM32G4) || defined(STM32L4) || defined(STM32WB) || defined(STM32WL)
+    if (__HAL_RCC_GET_FLAG(RCC_FLAG_BORRST) != RESET) {
     #else
     if (__HAL_RCC_GET_FLAG(RCC_FLAG_PORRST) != RESET) {
         #endif
