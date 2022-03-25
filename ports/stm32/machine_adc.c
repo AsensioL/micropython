@@ -267,7 +267,7 @@ STATIC void adc_config_channel(ADC_TypeDef *adc, uint32_t channel, uint32_t samp
     }
     #endif
 
-    #if defined(STM32F0) || defined(STM32L0) || defined(STM32G0)
+    #if defined(STM32F0) || defined(STM32G0) || defined(STM32L0)
 
     if (channel == ADC_CHANNEL_VREFINT) {
         ADC1_COMMON->CCR |= ADC_CCR_VREFEN;

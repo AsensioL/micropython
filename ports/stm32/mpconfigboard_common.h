@@ -326,7 +326,7 @@
 #define PYB_EXTI_NUM_VECTORS (22) // previously 23
 #define MICROPY_HW_MAX_I2C (3)
 #define MICROPY_HW_MAX_TIMER (17)
-#define MICROPY_HW_MAX_UART (6) // UART1-6 + LPUART1
+#define MICROPY_HW_MAX_UART (6)
 #define MICROPY_HW_MAX_LPUART (2)
 
 // Configuration for STM32G4 series

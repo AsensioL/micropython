@@ -210,7 +210,7 @@ STATIC bool is_adcx_channel(int channel) {
     return IS_ADC_CHANNEL(channel) || channel == ADC_CHANNEL_TEMPSENSOR;
     #elif defined(STM32F0) || defined(STM32F4) || defined(STM32F7)
     return IS_ADC_CHANNEL(channel);
-    #elif defined(STM32H7) || defined(STM32G0)
+    #elif defined(STM32G0) || defined(STM32H7)
     return __HAL_ADC_IS_CHANNEL_INTERNAL(channel)
            || IS_ADC_CHANNEL(__HAL_ADC_DECIMAL_NB_TO_CHANNEL(channel));
     #elif defined(STM32G4) || defined(STM32L4) || defined(STM32WB)

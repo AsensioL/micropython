@@ -747,7 +747,7 @@ mp_obj_t pyb_rtc_wakeup(size_t n_args, const mp_obj_t *args) {
         #elif defined(STM32H7)
         EXTI_D1->PR1 = 1 << EXTI_RTC_WAKEUP;
         #elif defined(STM32G0)
-        // TODO: No need to clear this, Confirm
+        // Do nothing
         #else
         EXTI->PR = 1 << EXTI_RTC_WAKEUP;
         #endif

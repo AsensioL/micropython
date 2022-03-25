@@ -529,8 +529,6 @@ bool uart_init(pyb_uart_obj_t *uart_obj,
             UARTx = LPUART2;
             #if defined(STM32G0)
             irqn = USART2_LPUART2_IRQn;
-            #else
-            irqn = USART2_IRQn;
             #endif
             pins[0] = MICROPY_HW_LPUART2_TX;
             pins[1] = MICROPY_HW_LPUART2_RX;

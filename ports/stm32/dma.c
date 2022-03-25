@@ -119,7 +119,7 @@ static const DMA_InitTypeDef dma_init_struct_spi_i2c = {
 static const DMA_InitTypeDef dma_init_struct_i2s = {
     #if defined(STM32F4) || defined(STM32F7)
     .Channel = 0,
-    #elif defined(STM32H7) || defined(STM32L0) || defined(STM32L4) || defined(STM32G0)
+    #elif defined(STM32G0) || defined(STM32H7) || defined(STM32L0) || defined(STM32L4)
     .Request = 0,
     #endif
     .Direction = DMA_MEMORY_TO_PERIPH,
