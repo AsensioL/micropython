@@ -1180,6 +1180,7 @@ void DMA2_Channel7_IRQHandler(void) {
     }
     IRQ_EXIT(DMA2_Channel7_IRQn);
 }
+
 #endif
 
 #if MICROPY_HW_DMA_ENABLE_AUTO_TURN_OFF

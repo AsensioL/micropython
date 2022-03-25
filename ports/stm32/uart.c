@@ -522,7 +522,7 @@ bool uart_init(pyb_uart_obj_t *uart_obj,
             break;
         #endif
 
-        #if defined(MICROPY_HW_LPUART2_TX) && defined(MICROPY_HW_LPUART2_RX)
+    #if defined(MICROPY_HW_LPUART2_TX) && defined(MICROPY_HW_LPUART2_RX)
         case PYB_LPUART_2:
             uart_fn = AF_FN_LPUART;
             uart_unit = 2;
@@ -544,7 +544,7 @@ bool uart_init(pyb_uart_obj_t *uart_obj,
             #endif
             __HAL_RCC_LPUART2_CLK_ENABLE();
             break;
-        #endif
+    #endif
 
         default:
             // UART does not exist or is not configured for this board

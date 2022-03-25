@@ -377,7 +377,7 @@ void extint_set(const pin_obj_t *pin, uint32_t mode) {
             (SYSCFG->EXTICR[line >> 2] & ~(0x0f << (4 * (line & 0x03))))
             | ((uint32_t)(GPIO_GET_INDEX(pin->gpio)) << (4 * (line & 0x03)));
         #endif
-        
+
         // Enable or disable the rising detector
         if ((mode & GPIO_MODE_IT_RISING) == GPIO_MODE_IT_RISING) {
             EXTI_RTSR |= 1 << line;
