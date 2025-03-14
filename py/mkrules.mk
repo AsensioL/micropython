@@ -255,7 +255,7 @@ submodules:
 	$(ECHO) "Updating submodules: $(GIT_SUBMODULES)"
 ifneq ($(GIT_SUBMODULES),)
 	$(Q)cd $(TOP) && git submodule sync $(GIT_SUBMODULES)
-	$(Q)cd $(TOP) && git submodule update --init --filter=blob:none $(GIT_SUBMODULES) || \
+	$(Q)cd $(TOP) && git submodule update --init $(GIT_SUBMODULES) || \
 	  git submodule update --init $(GIT_SUBMODULES)
 else
 ifeq ($(GIT_SUBMODULES_FAIL_IF_EMPTY),1)
